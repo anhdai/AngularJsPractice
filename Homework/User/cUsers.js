@@ -1,4 +1,13 @@
-angular.module('cApp', []).controller('UserCtrl', function($scope, $http) {
+angular.module('cApp', ['ngRoute']).config(function($routeProvider){
+  $routeProvider.
+  when('/', {
+    templateUrl: 'userData.html',
+    controller: 'UserCtrl'
+  }).
+  otherwise({
+    redirectTo: '/'
+  });
+}).controller('UserCtrl', function($scope, $http) {
   $scope.fName = '';
   $scope.lName = '';
   $scope.id = 0;

@@ -1,0 +1,6 @@
+<tr ng-repeat="user in users | filter:query | orderBy:sortField:reverse">
+  <td>{{user.id}}</td>
+  <td>{{user.fName}}</td>
+  <td>{{user.lName}}</td>
+  <td><input type="button" value="Edit" ng-click="editUser(user.id)"></td>
+</tr>
