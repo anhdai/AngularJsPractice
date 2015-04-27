@@ -1,0 +1,29 @@
+//Add remove action
+//HTML
+<table class="table table-striped">
+                <thead>
+                    <tr>
+                        <td>Id</td>
+                        <td>First Name</td>
+                        <td>Last Name</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="user in users">
+                        <td>
+                          <input type="button" value="Edit" ng-click="editUser(user.id)">
+                          <input type="button" value="Remove" ng-click="removeUser(user.id)">
+                        </td>
+                        <td>{{user.id}}</td>
+                        <td>{{user.fName}}</td>
+                        <td>{{user.lName}}</td>
+                    </tr>
+                </tbody>
+            </table>
+//JS
+  $scope.removeUser = function(id) {
+      if($scope.users.pop(id)) {
+        delete $scope.users[id];
+      }
+    }
+  
