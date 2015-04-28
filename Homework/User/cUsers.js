@@ -1,17 +1,24 @@
-angular.module('cApp', ['ngRoute']).config(function($routeProvider){
+var userApp = angular.module('cApp', ['ngRoute']);
+  userApp.config(function($routeProvider){
   $routeProvider.
   when('/', {
     templateUrl: 'userData.html',
-    controller: 'UserCtrl'
+    controller: 'UserList'
+  }).
+  when('/:ID',{
+      templateUrl: 'userDetail.html',
+      controller: 'UserDetail'
   }).
   otherwise({
     redirectTo: '/'
   });
-}).controller('UserCtrl', function($scope, $http) {
+});
+
+userApp.controller('UserList', function($scope, $http) {
   $scope.fName = '';
   $scope.lName = '';
   $scope.id = 0;
-  $http.get('data.json').success(function(data){
+  $http.post('data.json').success(function(data){
     $scope.users = data;
   });
   $scope.edit = false;
@@ -36,4 +43,15 @@ angular.module('cApp', ['ngRoute']).config(function($routeProvider){
     $scope.edit = true;
     $scope.id = id;
   }
+});
+
+userApp.controller('UserDetail', function($scope, $routeParams, $http) {
+    $scope.anotherId = $routeParams.ID;
+    $http.post("data.json").success(function(data){
+        $scope.userDetail = data.filter(function(entry){
+            console.log(typeof parseInt($scope.anotherId));
+            console.log(typeof entry.id);
+            return parseInt($scope.anotherId) === entry.id;
+        })[0];
+    });
 });
