@@ -1,5 +1,5 @@
-var userApp = angular.module('cApp', ['ngRoute']);
-  userApp.config(function($routeProvider){
+var userApp = angular.module('cApp', ['ngRoute','input']);
+userApp.config(function($routeProvider){
   $routeProvider.
   when('/', {
     templateUrl: 'userData.html',
@@ -37,16 +37,6 @@ userApp.factory('getUser', function($http){
             });
         }
     }
-});
-
-userApp.directive('user',function(){
-    return{
-        scope:{
-            user: "="
-        },
-        restrict: "A",
-        templateUrl: "userId.html"
-    };
 });
 
 userApp.controller('UserList', function($scope, getUser) {
@@ -89,4 +79,14 @@ userApp.controller('UserDetail', function($scope, $routeParams, getUser) {
 
 userApp.filter('encodeURI', function(){
     return window.encodeURI;
+});
+
+userApp.directive('user',function(){
+    return{
+        scope:{
+            user: "="
+        },
+        restrict: "A",
+        templateUrl: "userId.html"
+    };
 });
